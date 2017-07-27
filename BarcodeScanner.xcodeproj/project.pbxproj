@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2DBF9E0E1F169DEF006B5AA8 /* FocusViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBF9E0D1F169DEF006B5AA8 /* FocusViewType.swift */; };
+		8E597BBE989B96FFB8AB97B9 /* Pods_BarcodeScanner_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80807077FC3B30261851C055 /* Pods_BarcodeScanner_iOS.framework */; };
 		BE747D3F1F29741300ED94E2 /* clipboard-new-item.png in Resources */ = {isa = PBXBuildFile; fileRef = BE747D3D1F29741300ED94E2 /* clipboard-new-item.png */; };
 		BE747D401F29741300ED94E2 /* clipboard.png in Resources */ = {isa = PBXBuildFile; fileRef = BE747D3E1F29741300ED94E2 /* clipboard.png */; };
 		BE747D711F2AA0AC00ED94E2 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE747D701F2AA0AC00ED94E2 /* CartCell.swift */; };
@@ -24,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		2DBF9E0D1F169DEF006B5AA8 /* FocusViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusViewType.swift; sourceTree = "<group>"; };
+		7DC379F7F0376CA7B7B00FA1 /* Pods-BarcodeScanner-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarcodeScanner-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarcodeScanner-iOS/Pods-BarcodeScanner-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		80807077FC3B30261851C055 /* Pods_BarcodeScanner_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BarcodeScanner_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE747D3D1F29741300ED94E2 /* clipboard-new-item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipboard-new-item.png"; sourceTree = "<group>"; };
 		BE747D3E1F29741300ED94E2 /* clipboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard.png; sourceTree = "<group>"; };
 		BE747D701F2AA0AC00ED94E2 /* CartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		D5F1C1C61C9C5113001E17A6 /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
 		D5F1C1D21C9C5809001E17A6 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D5FC8AD61D252A12004BED88 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		D8762927EBADF567B53EFB6B /* Pods-BarcodeScanner-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarcodeScanner-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarcodeScanner-iOS/Pods-BarcodeScanner-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +49,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E597BBE989B96FFB8AB97B9 /* Pods_BarcodeScanner_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AE7DE775F610E7B8637CF2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80807077FC3B30261851C055 /* Pods_BarcodeScanner_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7153A7E1F8160016387E3A3A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8762927EBADF567B53EFB6B /* Pods-BarcodeScanner-iOS.debug.xcconfig */,
+				7DC379F7F0376CA7B7B00FA1 /* Pods-BarcodeScanner-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D50BE3E31C9FE7A80000A34C /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +92,8 @@
 				D5C629691C3A809D007F7B7C /* Sources */,
 				D5C6295C1C3A800E007F7B7C /* BarcodeScanner */,
 				D5B2E8A01C3A780C00C0327D /* Products */,
+				7153A7E1F8160016387E3A3A /* Pods */,
+				1AE7DE775F610E7B8637CF2E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,10 +145,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5B2E8B31C3A780C00C0327D /* Build configuration list for PBXNativeTarget "BarcodeScanner-iOS" */;
 			buildPhases = (
+				7577C85F3E8E7007457E436B /* [CP] Check Pods Manifest.lock */,
 				D5B2E89A1C3A780C00C0327D /* Sources */,
 				D5B2E89B1C3A780C00C0327D /* Frameworks */,
 				D5B2E89C1C3A780C00C0327D /* Headers */,
 				D5B2E89D1C3A780C00C0327D /* Resources */,
+				DEDD612ADFD4A267CDB24904 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -182,6 +208,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7577C85F3E8E7007457E436B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DEDD612ADFD4A267CDB24904 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarcodeScanner-iOS/Pods-BarcodeScanner-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D5B2E89A1C3A780C00C0327D /* Sources */ = {
@@ -298,6 +357,7 @@
 		};
 		D5B2E8B41C3A780C00C0327D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8762927EBADF567B53EFB6B /* Pods-BarcodeScanner-iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -324,6 +384,7 @@
 		};
 		D5B2E8B51C3A780C00C0327D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DC379F7F0376CA7B7B00FA1 /* Pods-BarcodeScanner-iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
