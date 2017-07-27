@@ -48,6 +48,14 @@ open class BarcodeScannerController: UIViewController {
 
     return button
     }()
+    
+    lazy var cartButton: UIButton = { [unowned self] in
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(flashButtonDidPress), for: .touchUpInside)
+        
+        return button
+        }()
+
 
   /// Animated focus view.
   lazy var focusView: UIView = {
@@ -140,6 +148,8 @@ open class BarcodeScannerController: UIViewController {
       } catch {}
 
       flashButton.setImage(torchMode.image, for: UIControlState())
+        cartButton.setImage(torchMode.cartImage, for: UIControlState())
+    
     }
   }
 
@@ -188,7 +198,7 @@ open class BarcodeScannerController: UIViewController {
 
     view.layer.addSublayer(videoPreviewLayer)
 
-    [infoView, headerView, settingsButton, flashButton, focusView].forEach {
+    [infoView, headerView, settingsButton, flashButton, cartButton, focusView].forEach {
       view.addSubview($0)
       view.bringSubview(toFront: $0)
     }
@@ -316,6 +326,7 @@ open class BarcodeScannerController: UIViewController {
 
     focusView.alpha = alpha
     flashButton.alpha = alpha
+    cartButton.alpha = alpha
     settingsButton.isHidden = status.state != .unauthorized
   }
 
@@ -323,6 +334,7 @@ open class BarcodeScannerController: UIViewController {
   func setupFrame() {
     headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 64)
     flashButton.frame = CGRect(x: view.frame.width - 50, y: 73, width: 37, height: 37)
+    cartButton.frame = CGRect(x: view.frame.width - 50, y: 150, width: 37, height: 37)
     infoView.frame = infoFrame
 
     if let videoPreviewLayer = videoPreviewLayer {

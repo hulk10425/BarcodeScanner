@@ -34,6 +34,19 @@ public enum TorchMode {
 
     return result
   }
+    
+    var cartImage: UIImage {
+        let result: UIImage
+        
+        switch self {
+        case .on:
+            result = imageNamed("clipboard-new-item")
+        case .off:
+            result = imageNamed("clipboard")
+        }
+        
+        return result
+    }
 
   /// Returns `AVCaptureTorchMode` value.
   var captureTorchMode: AVCaptureTorchMode {
