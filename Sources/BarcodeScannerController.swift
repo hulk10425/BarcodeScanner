@@ -1,13 +1,13 @@
 import UIKit
 import AVFoundation
-import M13Checkbox
 
 
 // MARK: - Delegates
 
 /// Delegate to handle the captured code.
 public protocol BarcodeScannerCodeDelegate: class {
-    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String)
+    func barcodeScannerFound(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String, itemData: Item)
+    func barcodeScannerNotFound(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String)
 }
 
 /// Delegate to report errors.
@@ -30,6 +30,13 @@ public protocol BarcodeScannerDismissalDelegate: class {
  - Not found error message
  */
 open class BarcodeScannerController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+    
+      let sample = Item.init(itemCode: "4710095915207", itemName: "泰山純水", itemType: "水瓶", itemPrice: 23.5, itemAmount: 50, itemStoreAmount: 45, itemMemo: nil, itemRentPrice: nil)
+    
+    ///BarCode information
+    var barcode: String = ""
+    var barcodeType: String = ""
+
     
     /// Video capture device.
     lazy var captureDevice: AVCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -87,30 +94,68 @@ open class BarcodeScannerController: UIViewController,UITableViewDelegate, UITab
         
         return button
         }()
-    
+    ///即時相機捕捉
     /// Video preview layer.
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    
+    //增加搜尋成功的alert
     /// The current controller's status mode.
     var status: Status = Status(state: .scanning) {
         didSet {
+            //殺毀？
+            //增加find的頁面
             let duration = status.animated &&
-                (status.state == .processing
-                    || oldValue.state == .processing
-                    || oldValue.state == .notFound
+                
+                (status.state == .processing || oldValue.state == .processing || oldValue.state == .notFound
                 ) ? 0.5 : 0.0
             
-            guard status.state != .notFound else {
-                infoView.status = status
+            //搜尋成功
+            guard status.state != .founded else {
+                let alertController = UIAlertController(title: "查詢成功", message: "物品名稱是：\(sample.itemName)\n barcode是\(sample.itemCode)\n 庫存數量：\(sample.itemStoreAmount)", preferredStyle: .alert)
+                //Todo:確定租借邏輯待確定
+                //Todo:自行新增邏輯待確定
+                let defaultAction = UIAlertAction(title: "確定", style: .default, handler: nil)
+                let addAction = UIAlertAction(title: "自行新增", style: .destructive, handler: nil)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(addAction)
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
                 
+                infoView.status = status
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+                    self.status = Status(state: .scanning)
+                }
+                print(self.status)
+                return
+                
+            }
+            
+            
+            //搜尋失敗
+            guard status.state != .notFound else {
+                
+                /// Alert Controller
+                let alertController = UIAlertController(title: "通知", message: "查無此項商品，是否需要新增此項商品，barcode是\(barcode)", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                //Todo:自行新增邏輯待確定
+                
+                let addAction = UIAlertAction(title: "自行新增", style: .destructive, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(addAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+                //這邊就是把 infoView的status改成 notFound
+                infoView.status = status
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+                    
                     self.status = Status(state: .scanning)
                 }
                 
                 return
             }
             
-            let delayReset = oldValue.state == .processing || oldValue.state == .notFound
+            let delayReset = oldValue.state == .processing || oldValue.state == .notFound || oldValue.state == .founded
             
             if !delayReset {
                 resetState()
@@ -497,8 +542,22 @@ extension BarcodeScannerController: AVCaptureMetadataOutputObjectsDelegate {
         }
         
         animateFlash(whenProcessing: isOneTimeSearch)
-        codeDelegate?.barcodeScanner(self, didCaptureCode: code, type: metadataObj.type)
+        //這邊抓到barcode相關資料值
+        barcode = metadataObj.stringValue
+        barcodeType = metadataObj.type
+        //Todo 把這邊的邏輯換成是查找firebase的邏輯
+        
+        
+        if sample.itemCode == code {
+            status = Status.init(state: .founded)
+            codeDelegate?.barcodeScannerFound(self, didCaptureCode: code, type: metadataObj.type, itemData: sample)
+        } else {
+            status = Status.init(state: .notFound)
+            codeDelegate?.barcodeScannerNotFound(self, didCaptureCode: code, type: metadataObj.type)
+        }
+        
     }
+
 }
 
 // MARK: - HeaderViewDelegate
