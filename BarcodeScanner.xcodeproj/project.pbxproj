@@ -78,7 +78,6 @@
 		BEF258C01F2B2CA300FC1748 /* Item */ = {
 			isa = PBXGroup;
 			children = (
-				BEF258C11F2B2CC400FC1748 /* Item.swift */,
 			);
 			name = Item;
 			sourceTree = "<group>";
@@ -129,6 +128,7 @@
 				BEF258C01F2B2CA300FC1748 /* Item */,
 				D5FC8AD61D252A12004BED88 /* State.swift */,
 				D5C4E08C1CA0BFB9008D9269 /* InfoView.swift */,
+				BEF258C11F2B2CC400FC1748 /* Item.swift */,
 				D5C4E08D1CA0BFB9008D9269 /* TorchMode.swift */,
 				2DBF9E0D1F169DEF006B5AA8 /* FocusViewType.swift */,
 				D5F1C1C51C9C5113001E17A6 /* Config.swift */,
